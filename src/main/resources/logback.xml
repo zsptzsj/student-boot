@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。 -->
+<configuration scan="false">
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- 对日志进行格式化 -->
+        <encoder>
+            <!-- pattern是用于控制日志的输出格式。 -->
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{50} %line: %msg%n</pattern>
+            <!-- 日志字符集 -->
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <!-- 输出到文档 -->
+    <!-- level为 DEBUG 日志，时间滚动输出  -->
+    <logger name="com.roadjava.student.mapper" level="debug"  additivity="false">
+        <appender-ref ref="stdout"/>
+    </logger>
+
+    <root level="info">
+        <appender-ref ref="stdout"/>
+    </root>
+</configuration>
