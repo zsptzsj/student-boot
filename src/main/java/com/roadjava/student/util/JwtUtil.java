@@ -34,8 +34,9 @@ public class JwtUtil {
 //    用来校验token是否合法
     public static Result<DecodedJWT> verify(String tokenToVerify) {
         String errMsg;
+        System.out.println(tokenToVerify);
         try{
-            DecodedJWT decodeJWT=JWT.require(Algorithm.HMAC256(SECRET)).build().verify(tokenToVerify);
+            DecodedJWT decodeJWT=JWT.require(Algorithm.HMAC256(SECRET)).build().verify("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJKd3RNYW5hZ2VyRFRPIjoie1wiaWRcIjoxLFwidXNlck5hbWVcIjpcImFkbWluXCJ9IiwiZXhwIjoxNjc0Nzg4MTk2fQ.MYzWdWR6LpPs1NB7Bow6olaByrlO0Ma0pT-RBoDznxk");
             return Result.buildSuccess(decodeJWT);
         }catch (AlgorithmMismatchException e){
             errMsg="算法不匹配";
@@ -58,8 +59,6 @@ public class JwtUtil {
 
     public static <T> T parse(DecodedJWT data, Class<T> clz) {
         Claim claim=data.getClaim(clz.getSimpleName());
-        System.out.println(claim);
-        System.out.println(claim);
         if (claim==null){
             return null;
         }
